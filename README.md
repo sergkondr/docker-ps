@@ -2,7 +2,7 @@ docker-ps
 ===
 
 ## Purpose
-As for me, `docker ps` is uninformative and inconvenient. Here I'm trying to create something for convient displaying running containers.
+As for me, `docker ps` is uninformative and inconvenient. Here I'm trying to create something for convenient displaying running containers.
 
 ## Compile
 ```
