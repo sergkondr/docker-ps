@@ -40,6 +40,9 @@ func main() {
 	}
 
 	containerListOptions := types.ContainerListOptions{}
+	if all {
+		containerListOptions.All = true
+	}
 
 	containers, err := cli.ContainerList(context.Background(), containerListOptions)
 	if err != nil {

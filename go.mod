@@ -1,4 +1,4 @@
-module "https://gitlab.com/vebeer/golang/docker-client"
+module "https://github.com/sergkondr/docker-ps"
 
 require (
 	github.com/docker/distribution v2.7.1+incompatible // indirect
