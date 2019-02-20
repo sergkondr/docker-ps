@@ -17,6 +17,5 @@ notifications:
   email: false
 
 script:
-  - golangci-lint run
   - go test -v -race ./...
-  
+  - go build .  
