@@ -1,15 +1,14 @@
-docker-ps
-===
+# docker-ps [![Go Report Card](https://goreportcard.com/badge/github.com/sergkondr/docker-ps)](https://goreportcard.com/report/github.com/sergkondr/docker-ps)
 
-## Purpose
+### Purpose
 As for me, `docker ps` is uninformative and inconvenient. Here I'm trying to create something for convenient displaying running containers.
 
-## Compile
+### Compile
 ```
 go build -o docker-ps .
 ```
 
-## Usage
+### Usage
 ```
 $ docker-ps
 clever_noyce
