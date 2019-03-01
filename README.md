@@ -3,6 +3,9 @@
 ### Purpose
 As for me, `docker ps` is uninformative and inconvenient. Here I'm trying to create something for convenient displaying running containers.
 
+### Download
+Compiled binary you can get [in releases](https://github.com/sergkondr/docker-ps/releases)
+
 ### Compile
 ```
 go build -o docker-ps .
