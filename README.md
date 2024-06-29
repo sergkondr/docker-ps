@@ -8,12 +8,12 @@ Compiled binary you can get [in releases](https://github.com/sergkondr/docker-ps
 
 ### Compile
 ```
-go build -o docker-ps .
+make build
 ```
 
 ### Usage
 ```
-$ docker-ps
+$ dps
 clever_noyce
     Container ID:       f7ea38fdcc90
     Image:              ubuntu:18.04
@@ -44,33 +44,56 @@ awesome_thompson
     IP-address:         172.17.0.2/16
     Ports:              0.0.0.0:2222 -> 22/tcp, 0.0.0.0:8080 -> 80/tcp
 
- 3 containers are running
 ```
 
-It also supports filtering of displaying containers by some string(it can be part of any parameter, e.g.: IP, volume, ):
-```
-$ docker-ps -m 172.17.0.2
-awesome_thompson
-    Container ID:       c896cbd44823
-    Image:              ubuntu:18.04
-    Command:            /entrypoint.sh bash
-    Created:            About an hour ago
-    Status:             Up About an hour
-    Network:            default
-    IP-address:         172.17.0.2/16
-    Ports:              0.0.0.0:2222 -> 22/tcp, 0.0.0.0:8080 -> 80/tcp
+[//]: # (It also supports filtering of displaying containers by some string&#40;it can be part of any parameter, e.g.: IP, volume, &#41;:)
 
-  3 containers are running
-$ docker-ps -m home
-clever_noyce
-    Container ID:       f7ea38fdcc90
-    Image:              ubuntu:18.04
-    Command:            bash
-    Created:            About a minute ago
-    Status:             Up About a minute
-    Network:            default
-    IP-address:         172.17.0.4/16
-    Container mounts:   /home/skondrashov:/home/user
+[//]: # (```)
 
-  3 containers are running
-```
+[//]: # ($ docker-ps -m 172.17.0.2)
+
+[//]: # (awesome_thompson)
+
+[//]: # (    Container ID:       c896cbd44823)
+
+[//]: # (    Image:              ubuntu:18.04)
+
+[//]: # (    Command:            /entrypoint.sh bash)
+
+[//]: # (    Created:            About an hour ago)
+
+[//]: # (    Status:             Up About an hour)
+
+[//]: # (    Network:            default)
+
+[//]: # (    IP-address:         172.17.0.2/16)
+
+[//]: # (    Ports:              0.0.0.0:2222 -> 22/tcp, 0.0.0.0:8080 -> 80/tcp)
+
+[//]: # ()
+[//]: # (  3 containers are running)
+
+[//]: # ($ docker-ps -m home)
+
+[//]: # (clever_noyce)
+
+[//]: # (    Container ID:       f7ea38fdcc90)
+
+[//]: # (    Image:              ubuntu:18.04)
+
+[//]: # (    Command:            bash)
+
+[//]: # (    Created:            About a minute ago)
+
+[//]: # (    Status:             Up About a minute)
+
+[//]: # (    Network:            default)
+
+[//]: # (    IP-address:         172.17.0.4/16)
+
+[//]: # (    Container mounts:   /home/skondrashov:/home/user)
+
+[//]: # ()
+[//]: # (  3 containers are running)
+
+[//]: # (```)
