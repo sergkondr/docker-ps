@@ -16,8 +16,16 @@ var (
 	flagAll = false
 )
 
+const usage = `Usage of dps:
+  -a, --all display all containers
+  -h, --help prints help information 
+`
+
 func main() {
-	flag.BoolVar(&flagAll, "all", false, "Display all containers")
+	flag.BoolVar(&flagAll, "all", false, "display all containers")
+	flag.BoolVar(&flagAll, "a", false, "display all containers")
+
+	flag.Usage = func() { fmt.Print(usage) }
 	flag.Parse()
 
 	socketAddr, err := getDockerSocketAddress()
@@ -30,13 +38,13 @@ func main() {
 		ShowAll:    flagAll,
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	ctx := context.Background()
 	containers, err := docker.GetList(ctx, opts)
 	if err != nil {
 		log.Fatal("can't list containers:", err)
 	}
-	err = docker.PrintContainersList(containers)
+
+	err = docker.PrintContainersList(containers, os.Stdout)
 	if err != nil {
 		log.Fatal("can't print containers:", err)
 	}

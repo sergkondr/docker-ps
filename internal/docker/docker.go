@@ -3,7 +3,6 @@ package docker
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -17,7 +16,11 @@ type GetOpts struct {
 }
 
 func GetList(ctx context.Context, opts GetOpts) ([]types.Container, error) {
-	apiClient, err := client.NewClientWithOpts(client.FromEnv) //client.WithHost(opts.SocketAddr))
+	apiClient, err := client.NewClientWithOpts(
+		client.WithAPIVersionNegotiation(),
+		client.WithHost(opts.SocketAddr),
+		client.FromEnv,
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -33,9 +36,4 @@ func GetList(ctx context.Context, opts GetOpts) ([]types.Container, error) {
 	}
 
 	return containers, nil
-}
-
-func (c *ContainerInfo) String() string {
-	sb := strings.Builder{}
-	return sb.String()
 }

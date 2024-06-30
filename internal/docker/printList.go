@@ -3,6 +3,8 @@ package docker
 import (
 	"bytes"
 	"fmt"
+	"io"
+	"path"
 	"strings"
 	"text/template"
 	"time"
@@ -12,7 +14,10 @@ import (
 	"github.com/docker/go-units"
 )
 
-var ()
+var (
+	sep                       = ", "
+	containerInfoTemplateFile = "internal/docker/template.tmpl"
+)
 
 type ContainerInfo struct {
 	Name        string
@@ -28,25 +33,10 @@ type ContainerInfo struct {
 }
 
 func (c *ContainerInfo) Render() (string, error) {
-	containerInfoTemplate := `{{ .Name }}
-    Container ID:    {{ .ID }}
-    Image:           {{ .Image }}
-    Command:         {{ .Command }}
-    Created:         {{ .CreatedTime }}
-{{ if .Mounts }}    Mounts:          {{ .Mounts }}
-{{ end }}    Network:         {{ .Network }}
-{{ if .IPAddresses }}    IP-address:      {{ .IPAddresses }}
-{{ end }}{{ if .Ports }}    Ports:           {{ .Ports }}
-{{ end }}    Status:          {{ .Status }}
-`
-
-	tmpl, err := template.New("container").Parse(containerInfoTemplate)
-	if err != nil {
-		return "", fmt.Errorf("error parsing template: %v", err)
-	}
+	tmpl := template.Must(template.New(path.Base(containerInfoTemplateFile)).ParseFiles(containerInfoTemplateFile))
 
 	buff := &bytes.Buffer{}
-	err = tmpl.Execute(buff, c)
+	err := tmpl.Execute(buff, c)
 	if err != nil {
 		fmt.Printf("error executing template: %v", err)
 	}
@@ -54,7 +44,7 @@ func (c *ContainerInfo) Render() (string, error) {
 	return buff.String(), nil
 }
 
-func PrintContainersList(containers []types.Container) error {
+func PrintContainersList(containers []types.Container, w io.Writer) error {
 	if len(containers) == 0 {
 		return nil
 	}
@@ -66,7 +56,7 @@ func PrintContainersList(containers []types.Container) error {
 			return fmt.Errorf("can't render container info: %v", err)
 		}
 
-		fmt.Println(result)
+		fmt.Fprintf(w, result)
 	}
 
 	return nil
@@ -97,7 +87,7 @@ func getIPAddress(c types.Container) string {
 			}
 		}
 	}
-	return strings.Join(ip, ", ")
+	return strings.Join(ip, sep)
 }
 
 func getContainerMounts(c types.Container) string {
@@ -106,5 +96,5 @@ func getContainerMounts(c types.Container) string {
 		mount := fmt.Sprintf("%v:%v", m.Source, m.Destination)
 		mounts = append(mounts, mount)
 	}
-	return strings.Join(mounts, ", ")
+	return strings.Join(mounts, sep)
 }
