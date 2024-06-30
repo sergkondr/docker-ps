@@ -49,7 +49,7 @@ func PrintContainersList(containers []types.Container, w io.Writer) error {
 		return nil
 	}
 
-	for _, container := range containers {
+	for i, container := range containers {
 		x := convertContainerToContainerInfo(container)
 		result, err := x.Render()
 		if err != nil {
@@ -57,6 +57,9 @@ func PrintContainersList(containers []types.Container, w io.Writer) error {
 		}
 
 		fmt.Fprintf(w, result)
+		if i != len(containers)-1 {
+			fmt.Fprintf(w, "\n")
+		}
 	}
 
 	return nil
@@ -64,7 +67,7 @@ func PrintContainersList(containers []types.Container, w io.Writer) error {
 
 func convertContainerToContainerInfo(c types.Container) ContainerInfo {
 	return ContainerInfo{
-		Name:        c.Names[0][1:],
+		Name:        c.Names[0][1:], // originally it starts from "/"
 		ID:          c.ID[:12],
 		Image:       c.Image,
 		Command:     c.Command,

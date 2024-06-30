@@ -28,6 +28,8 @@ func main() {
 	flag.Usage = func() { fmt.Print(usage) }
 	flag.Parse()
 
+	ctx := context.Background()
+
 	socketAddr, err := getDockerSocketAddress()
 	if err != nil {
 		log.Fatal("can't get docker socket location: ", err)
@@ -38,10 +40,14 @@ func main() {
 		ShowAll:    flagAll,
 	}
 
-	ctx := context.Background()
 	containers, err := docker.GetList(ctx, opts)
 	if err != nil {
 		log.Fatal("can't list containers:", err)
+	}
+
+	if len(containers) == 0 {
+		fmt.Println("no running containers")
+		return
 	}
 
 	err = docker.PrintContainersList(containers, os.Stdout)
