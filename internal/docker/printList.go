@@ -32,18 +32,6 @@ type ContainerInfo struct {
 	Mounts      string
 }
 
-func (c *ContainerInfo) Render() (string, error) {
-	tmpl := template.Must(template.New(path.Base(containerInfoTemplateFile)).ParseFiles(containerInfoTemplateFile))
-
-	buff := &bytes.Buffer{}
-	err := tmpl.Execute(buff, c)
-	if err != nil {
-		fmt.Printf("error executing template: %v", err)
-	}
-
-	return buff.String(), nil
-}
-
 func PrintContainersList(containers []types.Container, w io.Writer) error {
 	if len(containers) == 0 {
 		return nil
@@ -51,7 +39,7 @@ func PrintContainersList(containers []types.Container, w io.Writer) error {
 
 	for i, container := range containers {
 		x := convertContainerToContainerInfo(container)
-		result, err := x.Render()
+		result, err := x.render()
 		if err != nil {
 			return fmt.Errorf("can't render container info: %v", err)
 		}
@@ -100,4 +88,16 @@ func getContainerMounts(c types.Container) string {
 		mounts = append(mounts, mount)
 	}
 	return strings.Join(mounts, sep)
+}
+
+func (c *ContainerInfo) render() (string, error) {
+	tmpl := template.Must(template.New(path.Base(containerInfoTemplateFile)).ParseFiles(containerInfoTemplateFile))
+
+	buff := &bytes.Buffer{}
+	err := tmpl.Execute(buff, c)
+	if err != nil {
+		fmt.Printf("error executing template: %v", err)
+	}
+
+	return buff.String(), nil
 }

@@ -2,9 +2,9 @@
     Container ID:    {{ .ID }}
     Image:           {{ .Image }}
     Command:         {{ .Command }}
-    Created:         {{ .CreatedTime }}
-{{ if .Mounts }}    Mounts:          {{ .Mounts }}
-{{ end }}    Network:         {{ .Network }}
-{{ if .IPAddresses }}    IP-address:      {{ .IPAddresses }}
-{{ end }}{{ if .Ports }}    Ports:           {{ .Ports }}
-{{ end }}    Status:          {{ .Status }}
+    Created:         {{ .CreatedTime }} {{ if .Mounts }}
+    Mounts:          {{ .Mounts }}
+    Network:         {{ .Network }}     {{ end }}{{ if .IPAddresses }}
+    IP-address:      {{ .IPAddresses }} {{ end }}{{ if .Ports }}
+    Ports:           {{ .Ports }}       {{ end }}
+    Status:          {{ .Status }}

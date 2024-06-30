@@ -1,4 +1,4 @@
-# docker-ps [![Build Status](https://travis-ci.com/sergkondr/docker-ps.svg?branch=master)](https://travis-ci.com/sergkondr/docker-ps) [![Go Report Card](https://goreportcard.com/badge/github.com/sergkondr/docker-ps)](https://goreportcard.com/report/github.com/sergkondr/docker-ps)
+# docker-ps [![Go Report Card](https://goreportcard.com/badge/github.com/sergkondr/docker-ps)](https://goreportcard.com/report/github.com/sergkondr/docker-ps)
 
 ### Purpose
 As for me, `docker ps` is uninformative and inconvenient. Here I'm trying to create something for convenient displaying running containers.
