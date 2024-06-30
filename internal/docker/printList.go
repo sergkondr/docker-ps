@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"path"
 	"strings"
 	"text/template"
 	"time"
@@ -15,8 +14,7 @@ import (
 )
 
 var (
-	sep                       = ", "
-	containerInfoTemplateFile = "internal/docker/template.tmpl"
+	sep = ", "
 )
 
 type ContainerInfo struct {
@@ -91,7 +89,7 @@ func getContainerMounts(c types.Container) string {
 }
 
 func (c *ContainerInfo) render() (string, error) {
-	tmpl := template.Must(template.New(path.Base(containerInfoTemplateFile)).ParseFiles(containerInfoTemplateFile))
+	tmpl := template.Must(template.New("container").Parse(containerOutput))
 
 	buff := &bytes.Buffer{}
 	err := tmpl.Execute(buff, c)
