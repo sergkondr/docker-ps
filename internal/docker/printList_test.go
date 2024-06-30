@@ -45,6 +45,7 @@ func Test_getIPAddress(t *testing.T) {
 			want: "127.0.0.1/32",
 		},
 		{
+			// TODO: unsorted output failing test
 			name: "get ip address - two addresses",
 			args: args{c: types.Container{
 				NetworkSettings: &types.SummaryNetworkSettings{

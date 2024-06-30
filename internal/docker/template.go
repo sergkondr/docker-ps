@@ -1,4 +1,6 @@
-{{ .Name }}
+package docker
+
+var containerOutput = `{{ .Name }}
     Container ID:    {{ .ID }}
     Image:           {{ .Image }}
     Command:         {{ .Command }}
@@ -8,3 +10,4 @@
     IP-address:      {{ .IPAddresses }} {{ end }}{{ if .Ports }}
     Ports:           {{ .Ports }}       {{ end }}
     Status:          {{ .Status }}
+`
