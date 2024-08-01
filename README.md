@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT%202.0-blue.svg)](https://github.com/sergkondr/docker-ps/blob/main/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/sergkondr/docker-ps.svg)](https://github.com/sergkondr/docker-ps/releases/latest)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sergkondr/docker-ps)](https://goreportcard.com/report/github.com/sergkondr/docker-ps)
+[![Go](https://github.com/sergkondr/docker-ps/actions/workflows/go.yml/badge.svg)](https://github.com/sergkondr/docker-ps/actions/workflows/go.yml)
 
 ### Purpose
 As for me, `docker ps` is uninformative and inconvenient.
